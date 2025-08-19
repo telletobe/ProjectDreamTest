@@ -15,6 +15,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryEvent);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractAction, ACharacter*, Interactor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnReadyInventory, UGameInventory*, PlayerInventory);
 
 /**
  *  A simple player-controllable third person character
@@ -62,7 +63,7 @@ public:
 	AProjectDreamCharacter();	
 
 	virtual void BeginPlay() override;
-	TObjectPtr<class UGameInventory> GetItemInventory() { return ItemInventory; }
+	TObjectPtr<class UGameInventory> GetItemInventory() { return ItemInventory.Get(); }
 
 	void SetInteractTarger(class AGameItem* Target);
 	void ClearInteractTarget(UObject* Who);
@@ -108,6 +109,8 @@ public:
 	UPROPERTY()
 	FOnInteractAction OnInteractAction;
 
+	UPROPERTY()
+	FOnReadyInventory OnReadyInventory;
 public:
 
 	/** Returns CameraBoom subobject **/

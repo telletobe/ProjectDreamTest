@@ -78,6 +78,8 @@ void AProjectDreamCharacter::BeginPlay()
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Inventory Create"));
 			UE_LOG(LogTemplateCharacter,Warning,TEXT("Inventory Create"));
+			OnReadyInventory.Broadcast(ItemInventory);
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Inventory BroadCast"));
 		}
 	}
 

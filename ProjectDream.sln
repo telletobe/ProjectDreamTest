@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intermediate", "Intermediate", "{1D223C92-6D79-4096-8371-66D2EEE8CFC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{76F6EA6B-0483-436D-92DF-71642C744067}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildRulesProjects", "BuildRulesProjects", "{B5A6FB29-E47C-4E09-8CCA-BF70C6E2D3C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectDreamModuleRules", "Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\ProjectDreamModuleRules.csproj", "{9525891B-7691-4E27-8419-B9186B8422CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9525891B-7691-4E27-8419-B9186B8422CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9525891B-7691-4E27-8419-B9186B8422CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9525891B-7691-4E27-8419-B9186B8422CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9525891B-7691-4E27-8419-B9186B8422CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76F6EA6B-0483-436D-92DF-71642C744067} = {1D223C92-6D79-4096-8371-66D2EEE8CFC2}
+		{B5A6FB29-E47C-4E09-8CCA-BF70C6E2D3C3} = {76F6EA6B-0483-436D-92DF-71642C744067}
+		{9525891B-7691-4E27-8419-B9186B8422CD} = {B5A6FB29-E47C-4E09-8CCA-BF70C6E2D3C3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32CF5C45-D5D3-48C0-96B9-6B9F00B811FB}
+	EndGlobalSection
+EndGlobal

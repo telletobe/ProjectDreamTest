@@ -17,7 +17,7 @@ class PROJECTDREAM_API AGameItem : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AGameItem();
-	FGameItemData GetItemData() { return ItemData; }
+	FGameItemData& GetItemData() { return ItemData; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

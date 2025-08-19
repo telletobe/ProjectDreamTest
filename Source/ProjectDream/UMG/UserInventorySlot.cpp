@@ -3,16 +3,25 @@
 
 #include "UMG/UserInventorySlot.h"
 #include "Components/TextBlock.h"
+#include <ProjectDreamPlayerController.h>
+#include "ProjectDreamCharacter.h"
 
 void UUserInventorySlot::NativeConstruct()
 {
-
+	AProjectDreamPlayerController* PC = Cast<AProjectDreamPlayerController>(GetOwningPlayer());
+	if (PC)
+	{
+		AProjectDreamCharacter* Player = Cast<AProjectDreamCharacter>(PC->GetPawn());
+		if (Player)
+		{
+			
+		}
+	}
 }
 
-void UUserInventorySlot::BindData(const FGameItemData& InData)
+void UUserInventorySlot::UpdateData(const FGameItemData& InData)
 {
-	
-	if (!InData.IsValid()) return;
+	GEngine->AddOnScreenDebugMessage(-1,5.0f,FColor::MakeRandomColor(),TEXT("Call UpdateData"));
 
 	if (ItemName)
 	{
@@ -33,6 +42,5 @@ void UUserInventorySlot::BindData(const FGameItemData& InData)
 	{
 		ItemWeight->SetText(FText::AsNumber(InData.ItemWeight));
 	}
-
 
 }

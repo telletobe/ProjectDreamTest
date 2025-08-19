@@ -1,0 +1,27 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\unreal\\projectdream\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectdream\\module.projectdream.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\unreal\\engine\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectdream\\definitions.projectdream.h",
+            "c:\\unreal\\projectdream\\source\\projectdream\\worldtimecontroller\\worldtimecontroller.cpp",
+            "c:\\unreal\\projectdream\\source\\projectdream\\worldtimecontroller\\worldtimecontroller.h",
+            "c:\\unreal\\engine\\source\\runtime\\coreuobject\\public\\uobject\\noexporttypes.h",
+            "c:\\unreal\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "c:\\unreal\\engine\\source\\runtime\\coreuobject\\public\\serialization\\testundeclaredscriptstructobjectreferences.h",
+            "c:\\unreal\\engine\\source\\runtime\\core\\public\\math\\unitconversion.h",
+            "c:\\unreal\\engine\\source\\runtime\\core\\public\\math\\unitconversion.inl",
+            "c:\\unreal\\engine\\source\\runtime\\core\\public\\internationalization\\polyglottextdata.h",
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\worldtimecontroller.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\engine\\directionallight.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\engine\\light.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\light.generated.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\directionallight.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\public\\engineutils.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

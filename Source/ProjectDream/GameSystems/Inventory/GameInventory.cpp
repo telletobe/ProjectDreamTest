@@ -46,6 +46,12 @@ FGameItemData& FGameItemData::SetItemWeight(float Weight)
 	return *this;
 }
 
+FGameItemData& FGameItemData::SetItemQty(int Qty)
+{
+	ItemQty = Qty;
+	return *this;
+}
+
 UGameInventory::UGameInventory()
 {
 }
@@ -59,18 +65,39 @@ void UGameInventory::InitInventory(int32 Size)
 	}
 
 	InventoryData.SetNum(Size);
+}
 
+void UGameInventory::AddToQty(int32 ItemIndex, int32 ItemQty)
+{
+	InventoryData[ItemIndex].ItemQty += ItemQty;
+
+	GEngine->AddOnScreenDebugMessage(-1,3.0f,FColor::MakeRandomColor(),FString::Printf(TEXT("%d"),InventoryData[ItemIndex].ItemQty));
+
+	ChnageInventoryDataWithIndex.Broadcast(ItemIndex);
 }
 
 bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 {
+	for (int32 i = 0; i < InventoryData.Num(); i++)
+	{
+		// 같은 아이템이 있다면 아이템 데이터의 갯수만 증가후 배열에 추가하지않음.
+		// 아이템 갯수는 증가하나 BroadCast가 돼지않아 UI의 갱신이 안돼는중.
+		if ((InventoryData[i].ItemCategory == ItemData.ItemCategory) && InventoryData[i].ItemID == ItemData.ItemID)
+		{
+			AddToQty(i,ItemData.ItemQty);
+			return true;
+		}
+	}
+
 	FGameItemData Data;
+
 	Data.SetItemName(ItemData.ItemName)
 		.SetItemCategory(ItemData.ItemCategory)
-		.SetItemID(1)
+		.SetItemID(ItemData.ItemID)
 		.SetItemDescription(TEXT("Item"))
 		.SetUseQuickSlot(false)
-		.SetItemWeight(ItemData.ItemWeight);
+		.SetItemWeight(ItemData.ItemWeight)
+		.SetItemQty(ItemData.ItemQty);
 	if (ItemData.ItemCategory == ECategory::Equipment)
 	{
 		Data.SetCanEquipment(true);
@@ -80,13 +107,17 @@ bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 		Data.SetCanEquipment(false);
 	}
 	
-	// 같은 아이템이 있다면 아이템 데이터의 갯수만 증가후 배열에 추가하지않음.
-	// 아직 안만든 기능
-	InventoryData.Add(Data);
+
+	int32 NewIndex = InventoryData.Add(Data);
+	if (InventoryData[NewIndex].IsValid())
+	{
+		InventoryData[NewIndex].ItemIndex = NewIndex;
+	}
+
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Get Item!"));
 	UE_LOG(LogTemp,Warning,TEXT("Get Item!"));
 
-	ChangeInventoryData.Broadcast(); // UI Update
+	ChangeInventoryData.Broadcast(); // call UserInventory.cpp UpdateInventoryUI()
 
 	return true;
 }

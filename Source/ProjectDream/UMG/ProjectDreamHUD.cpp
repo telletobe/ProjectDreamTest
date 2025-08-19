@@ -8,26 +8,6 @@
 
 AProjectDreamHUD::AProjectDreamHUD()
 {
-	//static ConstructorHelpers::FClassFinder<UUserInventory> InventoryClass(TEXT("/Game/UMG/WBP_UserInventory.WBP_UserInventory_C"));
-	//static ConstructorHelpers::FClassFinder<UUserInventorySlot> InventorySlotClass(TEXT("/Game/UMG/WBP_UserInventorySlot.WBP_UserInventorySlot_C"));
-	//if (InventoryClass.Succeeded())
-	//{
-	//	InventoryWidgetClass = InventoryClass.Class;
-	//}
-	//else
-	//{
-	//	UE_LOG(LogTemp, Warning, TEXT("Inventory Widget Fail"));
-	//}
-
-
-	//if (InventorySlotClass.Succeeded())
-	//{
-	//	InventorySlotWidgetClass = InventorySlotClass.Class;
-	//}
-	//else
-	//{
-	//	UE_LOG(LogTemp,Warning,TEXT("Slot Widget Fail"));
-	//}
 
 }
 

@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\sidescrollingjumppad.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\unreal\\engine\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectdream\\definitions.projectdream.h",
+            "c:\\unreal\\projectdream\\source\\projectdream\\variant_sidescrolling\\gameplay\\sidescrollingjumppad.h",
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\sidescrollingjumppad.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

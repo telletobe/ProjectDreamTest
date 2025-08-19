@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Unreal\\ProjectDream\\Source\\ProjectDream\\ProjectDream.Build.cs",
+		"C:\\Unreal\\ProjectDream\\Source\\ProjectDream.Target.cs",
+		"C:\\Unreal\\ProjectDream\\Source\\ProjectDreamEditor.Target.cs"
+	],
+	"EngineVersion": "5.6.0"
+}

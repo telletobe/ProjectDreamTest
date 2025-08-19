@@ -25,6 +25,10 @@ public:
 	UFUNCTION()
 	void UpdateInventoryUI();
 	
+	UFUNCTION()
+	void UpdateInventoryUIWithIdx(int32 index);
+
+	UFUNCTION()
 	void BindInventory(UGameInventory* PlayerInventory);
 
 	void RebuildList();

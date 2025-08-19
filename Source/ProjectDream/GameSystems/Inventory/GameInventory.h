@@ -6,6 +6,8 @@
 #include "GameInventory.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangeInventoryData);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChangeInventoryDataWithIndex, int32, Index);
+
 
 class AGameItem;
 
@@ -36,6 +38,7 @@ public:
 	FGameItemData& SetCanEquipment(bool CanEquipment);
 	FGameItemData& SetUseQuickSlot(bool UseQuickSlot);
 	FGameItemData& SetItemWeight(float Weight);
+	FGameItemData& SetItemQty(int Qty);
 
 	bool IsValid() const { return (ItemID >= 1 && ItemQty > 0);}
 
@@ -56,6 +59,8 @@ public:
 	int32 ItemQty;
 	UPROPERTY(EditAnywhere, Category = "Data")
 	float ItemWeight;
+	UPROPERTY(VisibleAnywhere, Category = "Data")
+	int32 ItemIndex;
 
 private:
 
@@ -77,6 +82,9 @@ public :
 	int32 Num() const { return InventoryData.Num(); }
 
 	FChangeInventoryData ChangeInventoryData;
+	FChangeInventoryDataWithIndex ChnageInventoryDataWithIndex;
+
+	void AddToQty(int32 ItemIndex ,int32 ItemQty);
 
 private:
 

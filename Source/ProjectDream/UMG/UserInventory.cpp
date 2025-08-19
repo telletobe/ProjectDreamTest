@@ -18,25 +18,14 @@ void UUserInventory::NativeConstruct()
 		if (Player)
 		{
 			Player->OnInventoryEvent.AddUniqueDynamic(this, &UUserInventory::OnOffInventory);
-			BindInventory(Player->GetItemInventory());
-			
-			
+			Player->OnReadyInventory.AddUniqueDynamic(this, &UUserInventory::BindInventory);	
 		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Player is notFound"));
-		}
-	}
-	else
-	{
-		UE_LOG(LogTemp,Warning,TEXT("PC is notFound"));
 	}
 
 	if (ButtonClose)
 	{
 		ButtonClose->OnClicked.AddUniqueDynamic(this, &UUserInventory::OnOffInventory);
 	}
-
 }
 
 void UUserInventory::OnOffInventory()
@@ -75,18 +64,30 @@ void UUserInventory::UpdateInventoryUI()
 	{
 		UUserInventorySlot* NewSlot = CreateWidget<UUserInventorySlot>(GetOwningPlayer(), SlotWidgetClass);
 		if (!NewSlot) continue;
+		NewSlot->UpdateData(Rows[i]);
+		ItemScroll->AddChild(NewSlot);		
+		SlotWidgets.Add(NewSlot);		
 
-		NewSlot->BindData(Rows[i]);
-		ItemScroll->AddChild(NewSlot);
-		SlotWidgets.Add(NewSlot);
 	}
+}
 
+void UUserInventory::UpdateInventoryUIWithIdx(int32 index)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI(index)"));
+	UE_LOG(LogTemp, Warning, TEXT("Call UpdateInventoryUI(index)"));
+	if (!Inventory || !ItemScroll || !SlotWidgetClass) return;
+
+	
+	if (SlotWidgets[index])
+	{
+		TArray<FGameItemData> InvData = Inventory->GetInventoryData();
+		const FGameItemData IndexItemData = InvData[index];
+		SlotWidgets[index]->UpdateData(IndexItemData);
+	}
 }
 
 void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 {
-	if (Inventory && Inventory == PlayerInventory) return;
-
 	if (Inventory)
 	{
 		Inventory->ChangeInventoryData.RemoveAll(this);
@@ -95,12 +96,11 @@ void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 	if (PlayerInventory)
 	{
 		Inventory = PlayerInventory;
-		Inventory->ChangeInventoryData.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUI);
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Bind inventory"));
-	} 
-	else
-	{
-		return;
+		if (Inventory)
+		{
+			Inventory->ChangeInventoryData.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUI);
+			Inventory->ChnageInventoryDataWithIndex.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUIWithIdx);
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Bind inventory"));
+		}		
 	}
-
 }

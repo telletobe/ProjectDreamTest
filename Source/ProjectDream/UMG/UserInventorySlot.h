@@ -24,7 +24,9 @@ class PROJECTDREAM_API UUserInventorySlot : public UUserWidget
 	
 public:
 	virtual void NativeConstruct() override;
-	void BindData(const FGameItemData& InData);
+
+	UFUNCTION()
+	void UpdateData(const FGameItemData& InData);
 private:
 
 	void Refresh();
@@ -43,7 +45,4 @@ private:
 	TObjectPtr<UTextBlock> ItemCategory;
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> ItemWeight;
-
-	UPROPERTY()
-	FGameItemData ItemData;
 };

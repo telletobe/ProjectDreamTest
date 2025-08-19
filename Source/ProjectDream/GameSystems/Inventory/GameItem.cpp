@@ -35,8 +35,8 @@ void AGameItem::BeginPlay()
 	Super::BeginPlay();
 	if (BoxCollision)
 	{
-		BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &AGameItem::OnBoxBegin);
-		BoxCollision->OnComponentEndOverlap.AddDynamic(this, &AGameItem::OnBoxEnd);
+		BoxCollision->OnComponentBeginOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxBegin);
+		BoxCollision->OnComponentEndOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxEnd);
 	}
 }
 
@@ -55,6 +55,7 @@ void AGameItem::Interact(ACharacter* Interactor)
 		UGameInventory* PlayerInv = Player->GetItemInventory();
 		if (PlayerInv)
 		{
+			Player->OnInteractAction.RemoveDynamic(this, &AGameItem::Interact);
 			PlayerInv->AddToInventory(ItemData);
 			Destroy();
 		}
@@ -67,7 +68,7 @@ void AGameItem::OnBoxBegin(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	{
 		BoundCharacter = Character;
 		Character->SetInteractTarger(this);
-		Character->OnInteractAction.AddDynamic(this, &AGameItem::Interact);
+		Character->OnInteractAction.AddUniqueDynamic(this, &AGameItem::Interact);
 	}
 }
 
@@ -77,6 +78,11 @@ void AGameItem::OnBoxEnd(UPrimitiveComponent* OverlappedComponent, AActor* Other
 	{
 		Character->ClearInteractTarget(this);
 		Character->OnInteractAction.RemoveDynamic(this,&AGameItem::Interact);
+
+		if (BoundCharacter.Get() == Character)
+		{
+			BoundCharacter = nullptr;
+		}
 	}
 }
 
@@ -84,8 +90,14 @@ void AGameItem::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	if (BoundCharacter.IsValid())
 	{
-		AProjectDreamCharacter* P = Cast<AProjectDreamCharacter>(BoundCharacter);
-		P->OnInteractAction.RemoveDynamic(this, &AGameItem::Interact);
+		if (AProjectDreamCharacter* P = Cast<AProjectDreamCharacter>(BoundCharacter.Get()))
+		{
+			if (P->OnInteractAction.IsAlreadyBound(this, &AGameItem::Interact))
+			{
+				P->OnInteractAction.RemoveDynamic(this, &AGameItem::Interact);
+			}
+		}
+		BoundCharacter = nullptr;
 	}
 
 	Super::EndPlay(EndPlayReason);
