@@ -29,14 +29,22 @@ public:
 	void UpdateInventoryUIWithIdx(int32 index);
 
 	UFUNCTION()
+	void UpdateInventoryUIWithIdxTwoParams(int32 index1, int32 index2);
+
+	UFUNCTION()
 	void BindInventory(UGameInventory* PlayerInventory);
 
 	void RebuildList();
+
+	virtual bool NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op) override;
 
 private:
 
 	UPROPERTY()
 	FGameItemData InventoryData;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UBorder> InventoryBorder;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UScrollBox> ItemScroll = nullptr;
@@ -45,12 +53,14 @@ private:
 	TSubclassOf<class UUserInventorySlot> SlotWidgetClass;
 
 	UPROPERTY()
-	TObjectPtr<UGameInventory> Inventory = nullptr;
+	TArray<TObjectPtr<UUserInventorySlot>> SlotWidgets;
 
 	UPROPERTY()
-	TArray<TObjectPtr<UUserInventorySlot>> SlotWidgets;
+	TObjectPtr<UGameInventory> Inventory = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> ButtonClose;
+
+	int32 CaclTargetIndexFromMouse(const FGeometry& ScrollGeo, const FDragDropEvent& E) const;
 
 };

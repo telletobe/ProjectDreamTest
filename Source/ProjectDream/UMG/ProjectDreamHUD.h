@@ -21,7 +21,9 @@ class PROJECTDREAM_API AProjectDreamHUD : public AHUD
 public :
 	AProjectDreamHUD();
 	void BeginPlay();
-	
+	void ShowDropCatcher();
+	void HidDropCarcher();
+
 private:
 
 	UPROPERTY(EditAnywhere, Category ="UMG")
@@ -35,5 +37,11 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UUserInventorySlot> InventorySlotWidget;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UInventoryDropCatcher> DropCatcherWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UInventoryDropCatcher> DropCatcherWidget;
 
 };

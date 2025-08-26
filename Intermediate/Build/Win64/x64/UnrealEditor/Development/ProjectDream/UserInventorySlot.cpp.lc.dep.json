@@ -95,7 +95,18 @@
             "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
             "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
             "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
-            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\projectdreamcharacter.generated.h"
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\projectdreamcharacter.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\blueprint\\widgetblueprintlibrary.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\blueprint\\dragdropoperation.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\dragdropoperation.generated.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\widgetblueprintlibrary.generated.h",
+            "c:\\unreal\\projectdream\\source\\projectdream\\umg\\projectdreamhud.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\gameframework\\hud.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\gameframework\\hudhitbox.h",
+            "c:\\unreal\\engine\\source\\runtime\\engine\\classes\\gameframework\\debugtextinfo.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\debugtextinfo.generated.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\hud.generated.h",
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\projectdreamhud.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

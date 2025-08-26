@@ -4,6 +4,7 @@
 #include "UMG/ProjectDreamHUD.h"
 #include "UserInventory.h"
 #include "UserInventorySlot.h"
+#include "GameSystems/Inventory/InventoryDropCatcher.h"
 
 
 AProjectDreamHUD::AProjectDreamHUD()
@@ -32,5 +33,30 @@ void AProjectDreamHUD::BeginPlay()
 		}
 		
 	}
+
+	//if (DropCatcherWidgetClass)
+	//{
+	//	DropCatcherWidget = CreateWidget<UInventoryDropCatcher>(GetWorld(), DropCatcherWidgetClass);
+	//	DropCatcherWidget->AddToViewport();
+	//	DropCatcherWidget->SetVisibility(ESlateVisibility::Collapsed);
+	//}
 }
 
+//void AProjectDreamHUD::ShowDropCatcher()
+//{
+//	if (DropCatcherWidget)
+//	{
+//		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("ShowDropCatcher"));
+//		DropCatcherWidget->SetVisibility(ESlateVisibility::Visible);
+//	}
+//}
+//
+//void AProjectDreamHUD::HidDropCarcher()
+//{
+//	if (DropCatcherWidget)
+//	{
+//		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("hideDropCatcher"));
+//		DropCatcherWidget->SetVisibility(ESlateVisibility::Collapsed);
+//	}
+//}
+//

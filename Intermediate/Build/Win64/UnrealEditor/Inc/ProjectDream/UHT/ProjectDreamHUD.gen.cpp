@@ -16,6 +16,7 @@ COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AHUD();
 PROJECTDREAM_API UClass* Z_Construct_UClass_AProjectDreamHUD();
 PROJECTDREAM_API UClass* Z_Construct_UClass_AProjectDreamHUD_NoRegister();
+PROJECTDREAM_API UClass* Z_Construct_UClass_UInventoryDropCatcher_NoRegister();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UUserInventory_NoRegister();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UUserInventorySlot_NoRegister();
 UPackage* Z_Construct_UPackage__Script_ProjectDream();
@@ -79,11 +80,21 @@ struct Z_Construct_UClass_AProjectDreamHUD_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "UMG/ProjectDreamHUD.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DropCatcherWidgetClass_MetaData[] = {
+		{ "Category", "ProjectDreamHUD" },
+		{ "ModuleRelativePath", "UMG/ProjectDreamHUD.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DropCatcherWidget_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "UMG/ProjectDreamHUD.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_InventoryWidgetClass;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryWidget;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_InventorySlotWidgetClass;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_InventorySlotWidget;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DropCatcherWidgetClass;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_DropCatcherWidget;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -95,11 +106,15 @@ const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AProjectDreamHU
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventoryWidget = { "InventoryWidget", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectDreamHUD, InventoryWidget), Z_Construct_UClass_UUserInventory_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventoryWidget_MetaData), NewProp_InventoryWidget_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventorySlotWidgetClass = { "InventorySlotWidgetClass", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectDreamHUD, InventorySlotWidgetClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserInventorySlot_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventorySlotWidgetClass_MetaData), NewProp_InventorySlotWidgetClass_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventorySlotWidget = { "InventorySlotWidget", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectDreamHUD, InventorySlotWidget), Z_Construct_UClass_UUserInventorySlot_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventorySlotWidget_MetaData), NewProp_InventorySlotWidget_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_DropCatcherWidgetClass = { "DropCatcherWidgetClass", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectDreamHUD, DropCatcherWidgetClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UInventoryDropCatcher_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DropCatcherWidgetClass_MetaData), NewProp_DropCatcherWidgetClass_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_DropCatcherWidget = { "DropCatcherWidget", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AProjectDreamHUD, DropCatcherWidget), Z_Construct_UClass_UInventoryDropCatcher_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DropCatcherWidget_MetaData), NewProp_DropCatcherWidget_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectDreamHUD_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventoryWidgetClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventoryWidget,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventorySlotWidgetClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_InventorySlotWidget,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_DropCatcherWidgetClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectDreamHUD_Statics::NewProp_DropCatcherWidget,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AProjectDreamHUD_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AProjectDreamHUD_Statics::DependentSingletons[])() = {
@@ -138,10 +153,10 @@ AProjectDreamHUD::~AProjectDreamHUD() {}
 struct Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_ProjectDreamHUD_h__Script_ProjectDream_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectDreamHUD, AProjectDreamHUD::StaticClass, TEXT("AProjectDreamHUD"), &Z_Registration_Info_UClass_AProjectDreamHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectDreamHUD), 2804160566U) },
+		{ Z_Construct_UClass_AProjectDreamHUD, AProjectDreamHUD::StaticClass, TEXT("AProjectDreamHUD"), &Z_Registration_Info_UClass_AProjectDreamHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectDreamHUD), 1670916189U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_ProjectDreamHUD_h__Script_ProjectDream_2515169513(TEXT("/Script/ProjectDream"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_ProjectDreamHUD_h__Script_ProjectDream_113292874(TEXT("/Script/ProjectDream"),
 	Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_ProjectDreamHUD_h__Script_ProjectDream_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_ProjectDreamHUD_h__Script_ProjectDream_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

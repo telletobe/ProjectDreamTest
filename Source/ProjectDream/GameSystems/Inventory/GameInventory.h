@@ -7,7 +7,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangeInventoryData);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChangeInventoryDataWithIndex, int32, Index);
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FChangeInventoryDataWithTwoIndex, int32, Index1,int32 , index2);
 
 class AGameItem;
 
@@ -83,9 +83,10 @@ public :
 
 	FChangeInventoryData ChangeInventoryData;
 	FChangeInventoryDataWithIndex ChnageInventoryDataWithIndex;
+	FChangeInventoryDataWithTwoIndex ChangeInventoryDataWithTwoIndex;
 
 	void AddToQty(int32 ItemIndex ,int32 ItemQty);
-
+	void MoveOrMerge(int32 FromIndex, int32 TargetIndex);
 private:
 
 	TArray<FGameItemData> InventoryData;

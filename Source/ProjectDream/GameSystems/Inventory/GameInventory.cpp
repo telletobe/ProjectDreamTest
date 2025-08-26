@@ -76,6 +76,36 @@ void UGameInventory::AddToQty(int32 ItemIndex, int32 ItemQty)
 	ChnageInventoryDataWithIndex.Broadcast(ItemIndex);
 }
 
+void UGameInventory::MoveOrMerge(int32 FromIndex, int32 TargetIndex)
+{
+	if (!InventoryData.IsValidIndex(FromIndex)) return;
+
+	// Drop
+	if (TargetIndex == INDEX_NONE)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), TEXT("Remove"));
+		InventoryData.RemoveAt(FromIndex);
+		ChnageInventoryDataWithIndex.Broadcast(FromIndex);
+	}
+
+	if (!InventoryData.IsValidIndex(TargetIndex) || FromIndex == TargetIndex) return;
+
+	//Swap or Merge
+	
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), FString::Printf(TEXT("FromIndex : %d, TargetIndex : %d"), FromIndex, TargetIndex));
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), TEXT("Test Change"));
+	if (TargetIndex < InventoryData.Num())
+	{
+		InventoryData.Swap(FromIndex, TargetIndex);
+		ChangeInventoryDataWithTwoIndex.Broadcast(FromIndex, TargetIndex);
+		return;
+	}
+	else
+	{
+		return;
+	}	
+}
+
 bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 {
 	for (int32 i = 0; i < InventoryData.Num(); i++)

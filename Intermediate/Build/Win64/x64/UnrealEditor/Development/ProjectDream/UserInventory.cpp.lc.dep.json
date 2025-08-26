@@ -103,7 +103,11 @@
             "c:\\unreal\\projectdream\\source\\projectdream\\umg\\userinventoryslot.h",
             "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\userinventoryslot.generated.h",
             "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\scrollbox.h",
-            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\scrollbox.generated.h"
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\scrollbox.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\blueprint\\dragdropoperation.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\dragdropoperation.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\border.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\border.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

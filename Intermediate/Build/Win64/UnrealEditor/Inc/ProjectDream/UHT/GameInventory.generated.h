@@ -30,6 +30,13 @@ PROJECTDREAM_API void FChangeInventoryDataWithIndex_DelegateWrapper(const FMulti
 
 // ********** End Delegate FChangeInventoryDataWithIndex *******************************************
 
+// ********** Begin Delegate FChangeInventoryDataWithTwoIndex **************************************
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_10_DELEGATE \
+PROJECTDREAM_API void FChangeInventoryDataWithTwoIndex_DelegateWrapper(const FMulticastScriptDelegate& ChangeInventoryDataWithTwoIndex, int32 Index1, int32 index2);
+
+
+// ********** End Delegate FChangeInventoryDataWithTwoIndex ****************************************
+
 // ********** Begin ScriptStruct FGameItemData *****************************************************
 #define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_25_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGameItemData_Statics; \

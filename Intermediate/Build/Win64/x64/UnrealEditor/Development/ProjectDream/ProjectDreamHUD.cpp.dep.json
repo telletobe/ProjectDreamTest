@@ -87,7 +87,9 @@
             "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\gameinventory.generated.h",
             "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\userinventory.generated.h",
             "c:\\unreal\\projectdream\\source\\projectdream\\umg\\userinventoryslot.h",
-            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\userinventoryslot.generated.h"
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\userinventoryslot.generated.h",
+            "c:\\unreal\\projectdream\\source\\projectdream\\gamesystems\\inventory\\inventorydropcatcher.h",
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\inventorydropcatcher.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

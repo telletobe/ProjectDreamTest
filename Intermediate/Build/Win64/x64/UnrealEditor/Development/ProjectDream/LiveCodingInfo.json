@@ -2,7 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.ProjectDream.1.cpp.obj": [
-			"DreamGameInstance.cpp.obj",
 			"AnimNotify_CheckChargedAttack.gen.cpp.obj",
 			"AnimNotify_CheckCombo.gen.cpp.obj",
 			"AnimNotify_DoAttackTrace.gen.cpp.obj",
@@ -22,18 +21,17 @@
 			"CombatLavaFloor.gen.cpp.obj",
 			"CombatLifeBar.gen.cpp.obj",
 			"CombatPlayerController.gen.cpp.obj",
-			"CombatStateTreeUtility.gen.cpp.obj",
+			"CombatStateTreeUtility.gen.cpp.obj"
+		],
+		"Module.ProjectDream.2.cpp.obj": [
 			"DreamGameInstance.gen.cpp.obj",
 			"EnvQueryContext_Player.gen.cpp.obj",
-			"GameInventory.gen.cpp.obj",
 			"GameItem.gen.cpp.obj",
 			"PlatformingCharacter.gen.cpp.obj",
 			"PlatformingGameMode.gen.cpp.obj",
 			"PlatformingPlayerController.gen.cpp.obj",
-			"ProjectDream.init.gen.cpp.obj",
 			"ProjectDreamCharacter.gen.cpp.obj",
 			"ProjectDreamGameMode.gen.cpp.obj",
-			"ProjectDreamHUD.gen.cpp.obj",
 			"ProjectDreamPlayerController.gen.cpp.obj",
 			"SideScrollingAIController.gen.cpp.obj",
 			"SideScrollingCameraManager.gen.cpp.obj",
@@ -47,14 +45,20 @@
 			"SideScrollingPlayerController.gen.cpp.obj",
 			"SideScrollingSoftPlatform.gen.cpp.obj",
 			"SideScrollingStateTreeUtility.gen.cpp.obj",
+			"GameInventory.gen.cpp.obj",
+			"InventoryDropCatcher.gen.cpp.obj",
+			"ProjectDream.init.gen.cpp.obj",
+			"ProjectDreamHUD.gen.cpp.obj"
+		],
+		"Module.ProjectDream.3.cpp.obj": [
 			"SideScrollingUI.gen.cpp.obj",
-			"UserInventory.gen.cpp.obj",
 			"UserInventorySlot.gen.cpp.obj",
 			"WorldTimeController.gen.cpp.obj",
-			"PerModuleInline.gen.cpp.obj"
-		],
-		"Module.ProjectDream.2.cpp.obj": [
+			"PerModuleInline.gen.cpp.obj",
+			"DreamGameInstance.cpp.obj",
+			"GameItem.cpp.obj",
 			"ProjectDream.cpp.obj",
+			"ProjectDreamCharacter.cpp.obj",
 			"ProjectDreamGameMode.cpp.obj",
 			"ProjectDreamPlayerController.cpp.obj",
 			"CombatAIController.cpp.obj",
@@ -95,9 +99,9 @@
 			"SideScrollingPlayerController.cpp.obj",
 			"SideScrollingUI.cpp.obj",
 			"WorldTimeController.cpp.obj",
+			"UserInventory.gen.cpp.obj",
 			"GameInventory.cpp.obj",
-			"GameItem.cpp.obj",
-			"ProjectDreamCharacter.cpp.obj",
+			"InventoryDropCatcher.cpp.obj",
 			"ProjectDreamHUD.cpp.obj",
 			"UserInventory.cpp.obj",
 			"UserInventorySlot.cpp.obj"
