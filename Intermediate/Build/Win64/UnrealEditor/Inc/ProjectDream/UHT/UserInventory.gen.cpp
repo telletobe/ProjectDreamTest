@@ -15,13 +15,16 @@ void EmptyLinkFunctionForGeneratedCodeUserInventory() {}
 // ********** Begin Cross Module References ********************************************************
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UGameInventory_NoRegister();
+PROJECTDREAM_API UClass* Z_Construct_UClass_UQuantityPrompt_NoRegister();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UUserInventory();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UUserInventory_NoRegister();
 PROJECTDREAM_API UClass* Z_Construct_UClass_UUserInventorySlot_NoRegister();
 PROJECTDREAM_API UScriptStruct* Z_Construct_UScriptStruct_FGameItemData();
 UMG_API UClass* Z_Construct_UClass_UBorder_NoRegister();
 UMG_API UClass* Z_Construct_UClass_UButton_NoRegister();
+UMG_API UClass* Z_Construct_UClass_UHorizontalBox_NoRegister();
 UMG_API UClass* Z_Construct_UClass_UScrollBox_NoRegister();
+UMG_API UClass* Z_Construct_UClass_UTextBlock_NoRegister();
 UMG_API UClass* Z_Construct_UClass_UUserWidget();
 UPackage* Z_Construct_UPackage__Script_ProjectDream();
 // ********** End Cross Module References **********************************************************
@@ -168,53 +171,6 @@ DEFINE_FUNCTION(UUserInventory::execUpdateInventoryUIWithIdx)
 }
 // ********** End Class UUserInventory Function UpdateInventoryUIWithIdx ***************************
 
-// ********** Begin Class UUserInventory Function UpdateInventoryUIWithIdxTwoParams ****************
-struct Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics
-{
-	struct UserInventory_eventUpdateInventoryUIWithIdxTwoParams_Parms
-	{
-		int32 index1;
-		int32 index2;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "UMG/UserInventory.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FIntPropertyParams NewProp_index1;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_index2;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::NewProp_index1 = { "index1", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UserInventory_eventUpdateInventoryUIWithIdxTwoParams_Parms, index1), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::NewProp_index2 = { "index2", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UserInventory_eventUpdateInventoryUIWithIdxTwoParams_Parms, index2), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::NewProp_index1,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::NewProp_index2,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UUserInventory, nullptr, "UpdateInventoryUIWithIdxTwoParams", Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::PropPointers), sizeof(Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::UserInventory_eventUpdateInventoryUIWithIdxTwoParams_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::Function_MetaDataParams), Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::Function_MetaDataParams)},  };
-static_assert(sizeof(Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::UserInventory_eventUpdateInventoryUIWithIdxTwoParams_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(UUserInventory::execUpdateInventoryUIWithIdxTwoParams)
-{
-	P_GET_PROPERTY(FIntProperty,Z_Param_index1);
-	P_GET_PROPERTY(FIntProperty,Z_Param_index2);
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	P_THIS->UpdateInventoryUIWithIdxTwoParams(Z_Param_index1,Z_Param_index2);
-	P_NATIVE_END;
-}
-// ********** End Class UUserInventory Function UpdateInventoryUIWithIdxTwoParams ******************
-
 // ********** Begin Class UUserInventory ***********************************************************
 void UUserInventory::StaticRegisterNativesUUserInventory()
 {
@@ -224,7 +180,6 @@ void UUserInventory::StaticRegisterNativesUUserInventory()
 		{ "OnOffInventory", &UUserInventory::execOnOffInventory },
 		{ "UpdateInventoryUI", &UUserInventory::execUpdateInventoryUI },
 		{ "UpdateInventoryUIWithIdx", &UUserInventory::execUpdateInventoryUIWithIdx },
-		{ "UpdateInventoryUIWithIdxTwoParams", &UUserInventory::execUpdateInventoryUIWithIdxTwoParams },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -261,9 +216,6 @@ struct Z_Construct_UClass_UUserInventory_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n * \n */" },
-#endif
 		{ "IncludePath", "UMG/UserInventory.h" },
 		{ "ModuleRelativePath", "UMG/UserInventory.h" },
 	};
@@ -277,6 +229,20 @@ struct Z_Construct_UClass_UUserInventory_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ItemScroll_MetaData[] = {
 		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "UMG/UserInventory.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InventoryTopBar_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "UMG/UserInventory.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InventoryDescription_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "UMG/UserInventory.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeightText_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "UMG/UserInventory.h" },
 	};
@@ -296,15 +262,28 @@ struct Z_Construct_UClass_UUserInventory_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "UMG/UserInventory.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DropNumPromptClass_MetaData[] = {
+		{ "Category", "UserInventory" },
+		{ "ModuleRelativePath", "UMG/UserInventory.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DropNumPrompt_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "UMG/UserInventory.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_InventoryData;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryBorder;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ItemScroll;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryTopBar;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryDescription;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WeightText;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_SlotWidgetClass;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SlotWidgets_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_SlotWidgets;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_Inventory;
+	static const UECodeGen_Private::FWeakObjectPropertyParams NewProp_Inventory;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ButtonClose;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DropNumPromptClass;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_DropNumPrompt;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -312,7 +291,6 @@ struct Z_Construct_UClass_UUserInventory_Statics
 		{ &Z_Construct_UFunction_UUserInventory_OnOffInventory, "OnOffInventory" }, // 2842069687
 		{ &Z_Construct_UFunction_UUserInventory_UpdateInventoryUI, "UpdateInventoryUI" }, // 2865135852
 		{ &Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdx, "UpdateInventoryUIWithIdx" }, // 3474338334
-		{ &Z_Construct_UFunction_UUserInventory_UpdateInventoryUIWithIdxTwoParams, "UpdateInventoryUIWithIdxTwoParams" }, // 2933382275
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -323,20 +301,30 @@ struct Z_Construct_UClass_UUserInventory_Statics
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryData = { "InventoryData", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, InventoryData), Z_Construct_UScriptStruct_FGameItemData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventoryData_MetaData), NewProp_InventoryData_MetaData) }; // 1863388600
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryBorder = { "InventoryBorder", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, InventoryBorder), Z_Construct_UClass_UBorder_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventoryBorder_MetaData), NewProp_InventoryBorder_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_ItemScroll = { "ItemScroll", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, ItemScroll), Z_Construct_UClass_UScrollBox_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ItemScroll_MetaData), NewProp_ItemScroll_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryTopBar = { "InventoryTopBar", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, InventoryTopBar), Z_Construct_UClass_UHorizontalBox_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventoryTopBar_MetaData), NewProp_InventoryTopBar_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryDescription = { "InventoryDescription", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, InventoryDescription), Z_Construct_UClass_UHorizontalBox_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InventoryDescription_MetaData), NewProp_InventoryDescription_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_WeightText = { "WeightText", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, WeightText), Z_Construct_UClass_UTextBlock_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeightText_MetaData), NewProp_WeightText_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgetClass = { "SlotWidgetClass", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, SlotWidgetClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserInventorySlot_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SlotWidgetClass_MetaData), NewProp_SlotWidgetClass_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgets_Inner = { "SlotWidgets", nullptr, (EPropertyFlags)0x0104000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UUserInventorySlot_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgets = { "SlotWidgets", nullptr, (EPropertyFlags)0x0144008000000008, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, SlotWidgets), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SlotWidgets_MetaData), NewProp_SlotWidgets_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_Inventory = { "Inventory", nullptr, (EPropertyFlags)0x0144000000000000, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, Inventory), Z_Construct_UClass_UGameInventory_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Inventory_MetaData), NewProp_Inventory_MetaData) };
+const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_Inventory = { "Inventory", nullptr, (EPropertyFlags)0x0044000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, Inventory), Z_Construct_UClass_UGameInventory_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Inventory_MetaData), NewProp_Inventory_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_ButtonClose = { "ButtonClose", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, ButtonClose), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ButtonClose_MetaData), NewProp_ButtonClose_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_DropNumPromptClass = { "DropNumPromptClass", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, DropNumPromptClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UQuantityPrompt_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DropNumPromptClass_MetaData), NewProp_DropNumPromptClass_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UUserInventory_Statics::NewProp_DropNumPrompt = { "DropNumPrompt", nullptr, (EPropertyFlags)0x0144000000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UUserInventory, DropNumPrompt), Z_Construct_UClass_UQuantityPrompt_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DropNumPrompt_MetaData), NewProp_DropNumPrompt_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UUserInventory_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryData,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryBorder,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_ItemScroll,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryTopBar,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_InventoryDescription,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_WeightText,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgetClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgets_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_SlotWidgets,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_Inventory,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_ButtonClose,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_DropNumPromptClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UUserInventory_Statics::NewProp_DropNumPrompt,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UUserInventory_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UUserInventory_Statics::DependentSingletons[])() = {
@@ -376,10 +364,10 @@ UUserInventory::~UUserInventory() {}
 struct Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h__Script_ProjectDream_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UUserInventory, UUserInventory::StaticClass, TEXT("UUserInventory"), &Z_Registration_Info_UClass_UUserInventory, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUserInventory), 2163764704U) },
+		{ Z_Construct_UClass_UUserInventory, UUserInventory::StaticClass, TEXT("UUserInventory"), &Z_Registration_Info_UClass_UUserInventory, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUserInventory), 2085889707U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h__Script_ProjectDream_61611276(TEXT("/Script/ProjectDream"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h__Script_ProjectDream_2061668525(TEXT("/Script/ProjectDream"),
 	Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h__Script_ProjectDream_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h__Script_ProjectDream_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

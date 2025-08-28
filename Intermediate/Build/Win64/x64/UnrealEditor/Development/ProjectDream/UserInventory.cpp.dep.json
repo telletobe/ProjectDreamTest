@@ -105,7 +105,19 @@
             "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\scrollbox.h",
             "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\scrollbox.generated.h",
             "c:\\unreal\\engine\\source\\runtime\\umg\\public\\blueprint\\dragdropoperation.h",
-            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\dragdropoperation.generated.h"
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\dragdropoperation.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\border.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\border.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\horizontalbox.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\horizontalbox.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\blueprint\\widgetlayoutlibrary.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\widgetlayoutlibrary.generated.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\textblock.h",
+            "c:\\unreal\\engine\\source\\runtime\\umg\\public\\components\\textwidgettypes.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\textwidgettypes.generated.h",
+            "c:\\unreal\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\umg\\uht\\textblock.generated.h",
+            "c:\\unreal\\projectdream\\source\\projectdream\\gamesystems\\inventory\\quantityprompt.h",
+            "c:\\unreal\\projectdream\\intermediate\\build\\win64\\unrealeditor\\inc\\projectdream\\uht\\quantityprompt.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

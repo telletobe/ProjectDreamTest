@@ -7,9 +7,9 @@
 #include "GameSystems/Inventory/GameInventory.h"
 #include "UserInventory.generated.h"
 
-/**
- * 
- */
+
+DECLARE_LOG_CATEGORY_EXTERN(InventoryUIWidget, Log, All);
+
 UCLASS()
 class PROJECTDREAM_API UUserInventory : public UUserWidget
 {
@@ -29,15 +29,14 @@ public:
 	void UpdateInventoryUIWithIdx(int32 index);
 
 	UFUNCTION()
-	void UpdateInventoryUIWithIdxTwoParams(int32 index1, int32 index2);
-
-	UFUNCTION()
 	void BindInventory(UGameInventory* PlayerInventory);
 
 	void RebuildList();
 
-	virtual bool NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op) override;
+	bool CheckMousePointInUI(const FDragDropEvent& E);
 
+	virtual bool NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op) override;
+	virtual void NativeOnInitialized() override;
 private:
 
 	UPROPERTY()
@@ -49,6 +48,15 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UScrollBox> ItemScroll = nullptr;
 
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UHorizontalBox> InventoryTopBar;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UHorizontalBox> InventoryDescription;
+
+	UPROPERTY()
+	TObjectPtr<class UTextBlock> WeightText;
+
 	UPROPERTY(EditAnywhere,Category="Inventory | UI")
 	TSubclassOf<class UUserInventorySlot> SlotWidgetClass;
 
@@ -56,11 +64,19 @@ private:
 	TArray<TObjectPtr<UUserInventorySlot>> SlotWidgets;
 
 	UPROPERTY()
-	TObjectPtr<UGameInventory> Inventory = nullptr;
+	TWeakObjectPtr<UGameInventory> Inventory = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> ButtonClose;
 
-	int32 CaclTargetIndexFromMouse(const FGeometry& ScrollGeo, const FDragDropEvent& E) const;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UQuantityPrompt> DropNumPromptClass;
+
+	UPROPERTY()
+	TObjectPtr<class UQuantityPrompt> DropNumPrompt;
+
+
+private:
+	void UpdateWeightText();
 };

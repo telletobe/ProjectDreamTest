@@ -34,7 +34,7 @@ void UUserInventorySlot::UpdateData(const FGameItemData& InData)
 
 	if (ItemWeight)
 	{
-		ItemWeight->SetText(FText::AsNumber(InData.ItemWeight));
+		ItemWeight->SetText(FText::AsNumber(InData.ItemWeight * InData.ItemQty));
 	}
 
 	SlotIndex = InData.ItemIndex;
@@ -57,8 +57,6 @@ void UUserInventorySlot::NativeOnDragDetected(const FGeometry& InGeo, const FPoi
 
 	Op->Payload = this;
 	Op->Pivot = EDragPivot::MouseDown;
-
-	//UUserWidget* Visual = DuplicateObject(this, this->GetOuter());
 	
 	UUserInventorySlot* Visual =
 		CreateWidget<UUserInventorySlot>(GetOwningPlayer(), GetClass());
@@ -91,14 +89,16 @@ void UUserInventorySlot::NativeOnDragDetected(const FGeometry& InGeo, const FPoi
 	Op->DefaultDragVisual = Visual;
 
 	OutOp = Op;
+}
 
-	//if (AProjectDreamPlayerController* PC = Cast<AProjectDreamPlayerController>(GetOwningPlayer()))
-	//{
-	//	if (AProjectDreamHUD* HUD = PC->GetHUD<AProjectDreamHUD>())
-	//	{
-	//		HUD->ShowDropCatcher();
-	//	}
-	//}
+float UUserInventorySlot::GetItemWeight()
+{
+	if (ItemWeight)
+	{
+		FString WeightStr = ItemWeight->GetText().ToString();
+		return FCString::Atof(*WeightStr);
+	}
+	return 0.0f;
 }
 
 int32 UUserInventorySlot::GetItemQty()

@@ -30,15 +30,8 @@ PROJECTDREAM_API void FChangeInventoryDataWithIndex_DelegateWrapper(const FMulti
 
 // ********** End Delegate FChangeInventoryDataWithIndex *******************************************
 
-// ********** Begin Delegate FChangeInventoryDataWithTwoIndex **************************************
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_10_DELEGATE \
-PROJECTDREAM_API void FChangeInventoryDataWithTwoIndex_DelegateWrapper(const FMulticastScriptDelegate& ChangeInventoryDataWithTwoIndex, int32 Index1, int32 index2);
-
-
-// ********** End Delegate FChangeInventoryDataWithTwoIndex ****************************************
-
 // ********** Begin ScriptStruct FGameItemData *****************************************************
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_25_GENERATED_BODY \
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_24_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGameItemData_Statics; \
 	PROJECTDREAM_API static class UScriptStruct* StaticStruct();
 
@@ -49,7 +42,7 @@ struct FGameItemData;
 // ********** Begin Class UGameInventory ***********************************************************
 PROJECTDREAM_API UClass* Z_Construct_UClass_UGameInventory_NoRegister();
 
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_73_INCLASS_NO_PURE_DECLS \
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_72_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUGameInventory(); \
 	friend struct Z_Construct_UClass_UGameInventory_Statics; \
@@ -60,7 +53,7 @@ public: \
 	DECLARE_SERIALIZER(UGameInventory)
 
 
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_73_ENHANCED_CONSTRUCTORS \
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_72_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	UGameInventory(UGameInventory&&) = delete; \
 	UGameInventory(const UGameInventory&) = delete; \
@@ -70,12 +63,12 @@ public: \
 	NO_API virtual ~UGameInventory();
 
 
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_70_PROLOG
-#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_73_GENERATED_BODY \
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_69_PROLOG
+#define FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_72_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_73_INCLASS_NO_PURE_DECLS \
-	FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_73_ENHANCED_CONSTRUCTORS \
+	FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_72_INCLASS_NO_PURE_DECLS \
+	FID_ProjectDream_Source_ProjectDream_GameSystems_Inventory_GameInventory_h_72_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

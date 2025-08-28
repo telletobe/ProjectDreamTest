@@ -18,7 +18,6 @@ PROJECTDREAM_API UClass* Z_Construct_UClass_UGameInventory_NoRegister();
 PROJECTDREAM_API UEnum* Z_Construct_UEnum_ProjectDream_ECategory();
 PROJECTDREAM_API UFunction* Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryData__DelegateSignature();
 PROJECTDREAM_API UFunction* Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithIndex__DelegateSignature();
-PROJECTDREAM_API UFunction* Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature();
 PROJECTDREAM_API UScriptStruct* Z_Construct_UScriptStruct_FGameItemData();
 UPackage* Z_Construct_UPackage__Script_ProjectDream();
 // ********** End Cross Module References **********************************************************
@@ -92,56 +91,6 @@ void FChangeInventoryDataWithIndex_DelegateWrapper(const FMulticastScriptDelegat
 	ChangeInventoryDataWithIndex.ProcessMulticastDelegate<UObject>(&Parms);
 }
 // ********** End Delegate FChangeInventoryDataWithIndex *******************************************
-
-// ********** Begin Delegate FChangeInventoryDataWithTwoIndex **************************************
-struct Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics
-{
-	struct _Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms
-	{
-		int32 Index1;
-		int32 index2;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "GameSystems/Inventory/GameInventory.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FIntPropertyParams NewProp_Index1;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_index2;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FDelegateFunctionParams FuncParams;
-};
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::NewProp_Index1 = { "Index1", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms, Index1), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::NewProp_index2 = { "index2", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms, index2), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::NewProp_Index1,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::NewProp_index2,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FDelegateFunctionParams Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UPackage__Script_ProjectDream, nullptr, "ChangeInventoryDataWithTwoIndex__DelegateSignature", Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::_Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::Function_MetaDataParams)},  };
-static_assert(sizeof(Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::_Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms) < MAX_uint16);
-UFunction* Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUDelegateFunction(&ReturnFunction, Z_Construct_UDelegateFunction_ProjectDream_ChangeInventoryDataWithTwoIndex__DelegateSignature_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-void FChangeInventoryDataWithTwoIndex_DelegateWrapper(const FMulticastScriptDelegate& ChangeInventoryDataWithTwoIndex, int32 Index1, int32 index2)
-{
-	struct _Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms
-	{
-		int32 Index1;
-		int32 index2;
-	};
-	_Script_ProjectDream_eventChangeInventoryDataWithTwoIndex_Parms Parms;
-	Parms.Index1=Index1;
-	Parms.index2=index2;
-	ChangeInventoryDataWithTwoIndex.ProcessMulticastDelegate<UObject>(&Parms);
-}
-// ********** End Delegate FChangeInventoryDataWithTwoIndex ****************************************
 
 // ********** Begin Enum ECategory *****************************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_ECategory;

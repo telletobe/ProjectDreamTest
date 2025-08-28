@@ -10,6 +10,12 @@
 #include "Components/ScrollBox.h"
 #include "Blueprint/DragDropOperation.h"
 #include "Components/Border.h" 
+#include "Components/HorizontalBox.h"
+#include <Blueprint/WidgetLayoutLibrary.h>
+#include "Components/TextBlock.h"
+#include "ProjectDream/GameSystems/Inventory/QuantityPrompt.h"
+
+DEFINE_LOG_CATEGORY(InventoryUIWidget);
 
 void UUserInventory::NativeConstruct()
 {
@@ -28,7 +34,25 @@ void UUserInventory::NativeConstruct()
 	{
 		ButtonClose->OnClicked.AddUniqueDynamic(this, &UUserInventory::OnOffInventory);
 	}
+
+
+
 }
+
+void UUserInventory::NativeOnInitialized()
+{
+	if (DropNumPromptClass)
+	{
+	UE_LOG(LogTemp, Warning, TEXT("Call DropNumPrompt"));
+	DropNumPrompt = CreateWidget<UQuantityPrompt>(GetWorld(), DropNumPromptClass);		
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call DropNumPrompt NONE"));
+		UE_LOG(LogTemp, Warning, TEXT("Call DropNumPrompt NONE"));
+	}
+}
+
 
 void UUserInventory::OnOffInventory()
 {
@@ -58,7 +82,7 @@ void UUserInventory::UpdateInventoryUI()
 {
 	GEngine->AddOnScreenDebugMessage(-1,5.0f,FColor::MakeRandomColor(),TEXT("Call UpdateInventoryUI"));
 	UE_LOG(LogTemp, Warning, TEXT("Call UpdateInventoryUI"));
-	if (!Inventory || !ItemScroll || !SlotWidgetClass) return;
+	if (!Inventory.IsValid() || !ItemScroll || !SlotWidgetClass) return;
 
 	const TArray<FGameItemData>& Rows = Inventory->GetInventoryData();
 
@@ -71,81 +95,45 @@ void UUserInventory::UpdateInventoryUI()
 		SlotWidgets.Add(NewSlot);		
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), FString::Printf(TEXT("I : %d"),i));
 	}
-
-
+	UpdateWeightText();
 }
 
 void UUserInventory::UpdateInventoryUIWithIdx(int32 index)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI(index)"));
 	UE_LOG(LogTemp, Warning, TEXT("Call UpdateInventoryUI(index)"));
-	if (!Inventory || !ItemScroll || !SlotWidgetClass) return;
+	if (!Inventory.IsValid() || !ItemScroll || !SlotWidgetClass) return;
 
-	
 	if (SlotWidgets[index])
 	{
-		if (Inventory)
+		if (Inventory.IsValid())
 		{
 			if (SlotWidgets.Num() != Inventory->Num())
 			{
+				// case Item Drop
 				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI : Drop"));
 				SlotWidgets[index]->RemoveFromParent();				
 				SlotWidgets.RemoveAt(index);
+				UpdateWeightText();
 				return;
 			}
+			// case Item Get
+			TArray<FGameItemData> InvData = Inventory->GetInventoryData();
+			const FGameItemData IndexItemData = InvData[index];
+			SlotWidgets[index]->UpdateData(IndexItemData);
+			UpdateWeightText();
 		}
-
-		TArray<FGameItemData> InvData = Inventory->GetInventoryData();
-		const FGameItemData IndexItemData = InvData[index];
-		SlotWidgets[index]->UpdateData(IndexItemData);
+	}
+	else
+	{
+		UE_LOG(LogTemp,Error,TEXT("SlotWidget Index invalid!"));
 	}
 }
 
-void UUserInventory::UpdateInventoryUIWithIdxTwoParams(int32 index1, int32 index2)
-{
-	if (!Inventory || !ItemScroll || !SlotWidgetClass) return;
-
-	if (!SlotWidgets.IsValidIndex(index1) || !SlotWidgets.IsValidIndex(index2) || index1 == index2) return;
-	
-	SlotWidgets.Swap(index1, index2);
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI : Slot Swap"));
-
-	UWidget* A = SlotWidgets[index1];
-	UWidget* B = SlotWidgets[index2];
-	if (!A || !B) return;
-	if (A->GetParent() != ItemScroll || B->GetParent() != ItemScroll) return;
-
-	const int32 indexA = ItemScroll->GetChildIndex(A);
-	const int32 indexB = ItemScroll->GetChildIndex(B);
-	if (indexA == INDEX_NONE || indexB == INDEX_NONE) return;
-
-
-	const int32 Min = FMath::Min(indexA, indexB);
-	const int32 Max = FMath::Max(indexA, indexB);
-
-
-	float SavedOffset = 0.f;
-#if ENGINE_MAJOR_VERSION >= 5
-	SavedOffset = ItemScroll->GetScrollOffset();
-#endif
-
-	UWidget* MinW = ItemScroll->GetChildAt(Min);
-	UWidget* MaxW = ItemScroll->GetChildAt(Max);
-
-	ItemScroll->RemoveChildAt(Max);
-	ItemScroll->RemoveChildAt(Min);
-	ItemScroll->InsertChildAt(Min, MaxW);
-	ItemScroll->InsertChildAt(Max, MinW);
-
-	ItemScroll->InvalidateLayoutAndVolatility();
-#if ENGINE_MAJOR_VERSION >= 5
-	ItemScroll->SetScrollOffset(SavedOffset);
-#endif
-}
 
 void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 {
-	if (Inventory)
+	if (Inventory.IsValid())
 	{
 		Inventory->ChangeInventoryData.RemoveAll(this);
 	}
@@ -153,46 +141,92 @@ void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 	if (PlayerInventory)
 	{
 		Inventory = PlayerInventory;
-		if (Inventory)
+		if (Inventory.IsValid())
 		{
 			Inventory->ChangeInventoryData.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUI);
 			Inventory->ChnageInventoryDataWithIndex.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUIWithIdx);
-			Inventory->ChangeInventoryDataWithTwoIndex.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUIWithIdxTwoParams);
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Bind inventory"));
 		}		
 	}
 }
 
+
 bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op)
 {
 
-	if (!Inventory || !Op) return false;
+	if (!Inventory.IsValid() || !Op) return false;
+
+
+	UUserInventorySlot* DragSlot = Cast<UUserInventorySlot>(Op->Payload);
+
+	int TargetIndex = DragSlot->GetSlotIndex();
+
+	if (!SlotWidgets.IsValidIndex(TargetIndex)) return false;
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("NativeOnDrop")); // 여기까진 ok
 
-	int32 TargetIndex = CaclTargetIndexFromMouse(ItemScroll->GetCachedGeometry(),E);
-
-	int32 FromIndex = INDEX_NONE;
-	if (UUserInventorySlot* FromSlot = Cast<UUserInventorySlot>(Op->Payload))
-	{
-		FromIndex = FromSlot->GetSlotIndex();
-	}
-	else
+	if (CheckMousePointInUI(E))
 	{
 		return false;
 	}
-
-	if (!SlotWidgets.IsValidIndex(FromIndex) || TargetIndex == FromIndex) return false;
-
-	Inventory->MoveOrMerge(FromIndex,TargetIndex);
+	else
+	{
+		if (SlotWidgets[TargetIndex]->GetItemQty() <= 1)
+		{
+			Inventory->ItemDrop(TargetIndex);
+		}
+		else
+		{
+			// call Item Drop Num configuration
+			if (DropNumPrompt)
+			{
+				if (DropNumPrompt->IsInViewport())
+				{
+					DropNumPrompt->SetVisibility(ESlateVisibility::Visible);
+				}
+				else
+				{
+					DropNumPrompt->AddToViewport();
+				}
+				
+				// On OK click, drop the item in the chosen quantity.
+				// If Cancel is clicked, do not drop the item.
+			}
+			UE_LOG(InventoryUIWidget,Warning,TEXT("call Item Drop Num configuration"));
+		}
+	}
 
 	return true;
 }
 
-int32 UUserInventory::CaclTargetIndexFromMouse(const FGeometry& ScrollGeo, const FDragDropEvent& E) const
-{
-	if (!ItemScroll || SlotWidgets.Num() == 0) return INDEX_NONE;
 
+void UUserInventory::UpdateWeightText()
+{
+	if (!WeightText) return;
+
+	float TotalWeight = 0.0f;
+
+	if (!SlotWidgets.IsEmpty())
+	{
+		for (int32 i = 0; i < SlotWidgets.Num(); i++)
+		{
+			TotalWeight += SlotWidgets[i]->GetItemWeight();
+		}
+	}
+
+	FText Result = FText::Format(
+		NSLOCTEXT("UUserInventory", "WeightFormat", "{0} / 50"),
+		FText::AsNumber(TotalWeight)
+	);
+
+	WeightText->SetText(Result);
+	return;
+}
+
+
+// 마우스 포인트 계산을 여기서??
+bool UUserInventory::CheckMousePointInUI(const FDragDropEvent& E)
+{
+	if (!ItemScroll) return false;
 
 	const FGeometry& WidgetGeometry = GetCachedGeometry();
 
@@ -201,44 +235,17 @@ int32 UUserInventory::CaclTargetIndexFromMouse(const FGeometry& ScrollGeo, const
 
 	if (InventoryBorder)
 	{
-		const FGeometry& BorderGeometry = InventoryBorder->GetCachedGeometry();
-		//const FVector2D BorderTL = BorderGeometry.GetAbxolutePosition(); 보더의 절대좌표
-		//const FVector2D BorderBR = BorderGeometry.LocalToAbsolute(BorderGeometry.GetLocalSize()); 
-
+		const FGeometry& BorderGeometry = InventoryBorder->GetCachedGeometry();	
 		const FVector2D InventoryTL = WidgetGeometry.AbsoluteToLocal(BorderGeometry.GetAbsolutePosition());
 		const FVector2D InventoryBR = WidgetGeometry.AbsoluteToLocal(BorderGeometry.LocalToAbsolute(BorderGeometry.GetLocalSize()));
 
-
-		// 3) 부모 로컬 좌표계에서 안/밖 판정
 		const bool bInSide = (MousePos.X >= InventoryTL.X && MousePos.X < InventoryBR.X &&
-			MousePos.Y >= InventoryTL.Y && MousePos.Y < InventoryBR.Y);
-
-
+					    	  MousePos.Y >= InventoryTL.Y && MousePos.Y < InventoryBR.Y);
+	
 		if (!bInSide)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("OutSide"));
-			return INDEX_NONE;
+			return false;
 		}
 	}
-
-	//Slot의 UI 크기로 인덱스 확인
-	const float ScrollOffset = ItemScroll->GetScrollOffset();
-	float YInContent = MousePos.Y + ScrollOffset;
-	if (YInContent < 0.f) return INDEX_NONE;
-
-	float SlotHeight = (SlotWidgets.Num() > 0) ? SlotWidgets[0]->GetCachedGeometry().GetLocalSize().Y : 0.f;	
-	if (SlotHeight <= KINDA_SMALL_NUMBER) return INDEX_NONE;
-	
-
-	//FVector2D InvSlotUI = ScrollGeo.AbsoluteToLocal(ScreenPos);
-	//float Y = InvSlotUI.Y + ScrollOffset;
-	//int32 Index = FMath::FloorToInt(Y / SlotHeight);
-	//return Index;
-
-	// 4) 인덱스 계산
-	const float ContentHeight = SlotHeight * SlotWidgets.Num();
-	int32 Index = FMath::FloorToInt(YInContent / SlotHeight);
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("InSide"));
-	return Index;
+	return true;
 }

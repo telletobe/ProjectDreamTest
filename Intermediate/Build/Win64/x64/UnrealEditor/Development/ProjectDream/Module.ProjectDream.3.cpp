@@ -5,6 +5,7 @@
 #include "../../ProjectDream/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectDream/PerModuleInline.gen.cpp"
 #include "../../ProjectDream/Source/ProjectDream/GameSystems/DreamGameInstance.cpp"
 #include "../../ProjectDream/Source/ProjectDream/GameSystems/Inventory/GameItem.cpp"
+#include "../../ProjectDream/Source/ProjectDream/GameSystems/Inventory/InventoryDropCatcher.cpp"
 #include "../../ProjectDream/Source/ProjectDream/ProjectDream.cpp"
 #include "../../ProjectDream/Source/ProjectDream/ProjectDreamCharacter.cpp"
 #include "../../ProjectDream/Source/ProjectDream/ProjectDreamGameMode.cpp"

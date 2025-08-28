@@ -21,7 +21,6 @@ class UGameInventory;
 // ********** Begin Class UUserInventory ***********************************************************
 #define FID_ProjectDream_Source_ProjectDream_UMG_UserInventory_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execBindInventory); \
-	DECLARE_FUNCTION(execUpdateInventoryUIWithIdxTwoParams); \
 	DECLARE_FUNCTION(execUpdateInventoryUIWithIdx); \
 	DECLARE_FUNCTION(execUpdateInventoryUI); \
 	DECLARE_FUNCTION(execOnOffInventory);
