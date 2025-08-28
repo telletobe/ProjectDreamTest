@@ -1,5 +1,0 @@
-C:\Unreal\ProjectDream\Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\obj\Debug\ProjectDreamModuleRules.csproj.AssemblyReference.cache
-C:\Unreal\ProjectDream\Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\obj\Debug\ProjectDreamModuleRules.GeneratedMSBuildEditorConfig.editorconfig
-C:\Unreal\ProjectDream\Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\obj\Debug\ProjectDreamModuleRules.AssemblyInfoInputs.cache
-C:\Unreal\ProjectDream\Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\obj\Debug\ProjectDreamModuleRules.AssemblyInfo.cs
-C:\Unreal\ProjectDream\Intermediate\Build\BuildRulesProjects\ProjectDreamModuleRules\obj\Debug\ProjectDreamModuleRules.csproj.CoreCompileInputs.cache
