@@ -9,6 +9,7 @@
 
 
 DECLARE_LOG_CATEGORY_EXTERN(InventoryUIWidget, Log, All);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSlotIndex,int32, Index);
 
 UCLASS()
 class PROJECTDREAM_API UUserInventory : public UUserWidget
@@ -37,6 +38,8 @@ public:
 
 	virtual bool NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op) override;
 	virtual void NativeOnInitialized() override;
+
+	FUpdateSlotIndex UpdateSlotIndex;
 private:
 
 	UPROPERTY()

@@ -92,7 +92,8 @@ void UUserInventory::UpdateInventoryUI()
 		if (!NewSlot) continue;
 		NewSlot->UpdateData(Rows[i]);
 		ItemScroll->AddChild(NewSlot);		
-		SlotWidgets.Add(NewSlot);		
+		SlotWidgets.Add(NewSlot);
+		//UpdateSlotIndex.AddUniqueDynamic(NewSlot,&UUserInventorySlot::UpdateSlotIndex);  //---------------------------
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), FString::Printf(TEXT("I : %d"),i));
 	}
 	UpdateWeightText();
@@ -112,8 +113,10 @@ void UUserInventory::UpdateInventoryUIWithIdx(int32 index)
 			{
 				// case Item Drop
 				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI : Drop"));
+				//UpdateSlotIndex.RemoveDynamic(SlotWidgets[index], &UUserInventorySlot::UpdateSlotIndex); //---------------------------
 				SlotWidgets[index]->RemoveFromParent();				
 				SlotWidgets.RemoveAt(index);
+				UpdateSlotIndex.Broadcast(index);
 				UpdateWeightText();
 				return;
 			}
@@ -160,9 +163,14 @@ bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, U
 
 	int TargetIndex = DragSlot->GetSlotIndex();
 
-	if (!SlotWidgets.IsValidIndex(TargetIndex)) return false;
+	if (!SlotWidgets.IsValidIndex(TargetIndex)) 
+	{
+		UE_LOG(LogTemp,Warning,TEXT("TargetIndex :%d "),TargetIndex);
+		return false;
+	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("NativeOnDrop")); // 여기까진 ok
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("NativeOnDrop")); 
 
 	if (CheckMousePointInUI(E))
 	{
@@ -172,7 +180,7 @@ bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, U
 	{
 		if (SlotWidgets[TargetIndex]->GetItemQty() <= 1)
 		{
-			Inventory->ItemDrop(TargetIndex);
+			Inventory->ItemDrop(TargetIndex); 
 		}
 		else
 		{
@@ -223,7 +231,8 @@ void UUserInventory::UpdateWeightText()
 }
 
 
-// 마우스 포인트 계산을 여기서??
+
+// 마우스 포인트 계산을 여기서
 bool UUserInventory::CheckMousePointInUI(const FDragDropEvent& E)
 {
 	if (!ItemScroll) return false;

@@ -24,15 +24,21 @@ class PROJECTDREAM_API UUserInventorySlot : public UUserWidget
 	
 public:
 	virtual void NativeConstruct() override;
+	virtual void NativeDestruct() override;
 
 	UFUNCTION()
 	void UpdateData(const FGameItemData& InData);
+
+	UFUNCTION()
+	void UpdateSlotIndex(int32 Index);
 
 	virtual FReply NativeOnPreviewMouseButtonDown(const FGeometry& InGeo, const FPointerEvent& InMouseEvent) override;
 	virtual void NativeOnDragDetected(const FGeometry& InGeo, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOp) override;
 	float GetItemWeight();
 	int32 GetSlotIndex() { return SlotIndex; }
 	int32 GetItemQty();
+	void SetSlotIndex(int32 Index);
+
 
 private:
 

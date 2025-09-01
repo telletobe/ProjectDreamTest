@@ -7,10 +7,26 @@
 #include "ProjectDreamCharacter.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "ProjectDreamHUD.h"
+#include "Components/ScrollBox.h"
+#include "UserInventory.h"
 
 void UUserInventorySlot::NativeConstruct()
 {
 	SetVisibility(ESlateVisibility::Visible);
+
+	if (UUserInventory* UserInventory = GetTypedOuter<UUserInventory>())
+	{
+		UserInventory->UpdateSlotIndex.AddUniqueDynamic(this,&UUserInventorySlot::UpdateSlotIndex);
+	}
+
+}
+
+void UUserInventorySlot::NativeDestruct()
+{
+	if (UUserInventory* UserInventory = Cast<UUserInventory>(GetParent()->GetParent()))
+	{
+		UserInventory->UpdateSlotIndex.RemoveAll(this);
+	}
 }
 
 void UUserInventorySlot::UpdateData(const FGameItemData& InData)
@@ -37,7 +53,17 @@ void UUserInventorySlot::UpdateData(const FGameItemData& InData)
 		ItemWeight->SetText(FText::AsNumber(InData.ItemWeight * InData.ItemQty));
 	}
 
-	SlotIndex = InData.ItemIndex;
+	SetSlotIndex(InData.ItemIndex);
+}
+
+void UUserInventorySlot::UpdateSlotIndex(int32 Index)
+{
+	UScrollBox* ScrollBox = Cast<UScrollBox>(GetParent());
+	if (ScrollBox)
+	{
+		if (SlotIndex < Index) return;
+		SetSlotIndex(SlotIndex - 1);
+	}
 }
 
 FReply UUserInventorySlot::NativeOnPreviewMouseButtonDown(const FGeometry& InGeo, const FPointerEvent& InMouseEvent)
@@ -110,5 +136,10 @@ int32 UUserInventorySlot::GetItemQty()
 		LexTryParseString<int32>(Qty, *S);
 	}
 	return Qty;
+}
+
+void UUserInventorySlot::SetSlotIndex(int32 Index)
+{
+	SlotIndex = Index;
 }
 
