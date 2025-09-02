@@ -82,9 +82,10 @@ public :
 	int32 Num() const { return InventoryData.Num(); }
 
 	FChangeInventoryData ChangeInventoryData;
-	FChangeInventoryDataWithIndex ChnageInventoryDataWithIndex;
+	FChangeInventoryDataWithIndex ChangeInventoryDataWithIndex;
 
 	void AddToQty(int32 ItemIndex ,int32 ItemQty);
+	void MinusToQty(int32 ItemIndex, int32 ItemQty);
 private:
 
 	TArray<FGameItemData> InventoryData;

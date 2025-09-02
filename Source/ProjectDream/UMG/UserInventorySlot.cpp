@@ -14,18 +14,20 @@ void UUserInventorySlot::NativeConstruct()
 {
 	SetVisibility(ESlateVisibility::Visible);
 
-	if (UUserInventory* UserInventory = GetTypedOuter<UUserInventory>())
+	if (OwnerUI.IsValid())
 	{
-		UserInventory->UpdateSlotIndex.AddUniqueDynamic(this,&UUserInventorySlot::UpdateSlotIndex);
+		UE_LOG(LogTemp, Warning, TEXT("Slot Binding"));
+		OwnerUI->UpdateSlotIndex.AddUniqueDynamic(this,&UUserInventorySlot::UpdateSlotIndex);
 	}
 
 }
 
 void UUserInventorySlot::NativeDestruct()
 {
-	if (UUserInventory* UserInventory = Cast<UUserInventory>(GetParent()->GetParent()))
+	if (OwnerUI.IsValid())
 	{
-		UserInventory->UpdateSlotIndex.RemoveAll(this);
+		UE_LOG(LogTemp, Warning, TEXT("Slot Binding remove"));
+		OwnerUI->UpdateSlotIndex.RemoveAll(this);
 	}
 }
 
@@ -141,5 +143,15 @@ int32 UUserInventorySlot::GetItemQty()
 void UUserInventorySlot::SetSlotIndex(int32 Index)
 {
 	SlotIndex = Index;
+}
+
+void UUserInventorySlot::SetupOwner(UUserInventory* InOwner)
+{
+	if (InOwner)
+	{
+		OwnerUI = InOwner;
+	}
+
+	return;
 }
 

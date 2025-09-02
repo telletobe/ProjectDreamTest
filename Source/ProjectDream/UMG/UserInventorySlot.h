@@ -14,7 +14,7 @@
 class UButton;
 class UImage;
 class UTextBlock;
-
+class UUserInventory;
 
 
 UCLASS()
@@ -38,7 +38,7 @@ public:
 	int32 GetSlotIndex() { return SlotIndex; }
 	int32 GetItemQty();
 	void SetSlotIndex(int32 Index);
-
+	void SetupOwner(UUserInventory* InOwner);
 
 private:
 
@@ -61,5 +61,6 @@ private:
 
 	int32 SlotIndex;
 
+	TWeakObjectPtr<UUserInventory> OwnerUI;
 
 };

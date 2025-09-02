@@ -34,9 +34,6 @@ void UUserInventory::NativeConstruct()
 	{
 		ButtonClose->OnClicked.AddUniqueDynamic(this, &UUserInventory::OnOffInventory);
 	}
-
-
-
 }
 
 void UUserInventory::NativeOnInitialized()
@@ -52,7 +49,6 @@ void UUserInventory::NativeOnInitialized()
 		UE_LOG(LogTemp, Warning, TEXT("Call DropNumPrompt NONE"));
 	}
 }
-
 
 void UUserInventory::OnOffInventory()
 {
@@ -91,9 +87,9 @@ void UUserInventory::UpdateInventoryUI()
 		UUserInventorySlot* NewSlot = CreateWidget<UUserInventorySlot>(GetOwningPlayer(), SlotWidgetClass);
 		if (!NewSlot) continue;
 		NewSlot->UpdateData(Rows[i]);
+		NewSlot->SetupOwner(this);
 		ItemScroll->AddChild(NewSlot);		
 		SlotWidgets.Add(NewSlot);
-		//UpdateSlotIndex.AddUniqueDynamic(NewSlot,&UUserInventorySlot::UpdateSlotIndex);  //---------------------------
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::MakeRandomColor(), FString::Printf(TEXT("I : %d"),i));
 	}
 	UpdateWeightText();
@@ -113,18 +109,20 @@ void UUserInventory::UpdateInventoryUIWithIdx(int32 index)
 			{
 				// case Item Drop
 				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Call UpdateInventoryUI : Drop"));
-				//UpdateSlotIndex.RemoveDynamic(SlotWidgets[index], &UUserInventorySlot::UpdateSlotIndex); //---------------------------
+				UpdateSlotIndex.Broadcast(index);
 				SlotWidgets[index]->RemoveFromParent();				
 				SlotWidgets.RemoveAt(index);
-				UpdateSlotIndex.Broadcast(index);
 				UpdateWeightText();
 				return;
 			}
-			// case Item Get
-			TArray<FGameItemData> InvData = Inventory->GetInventoryData();
-			const FGameItemData IndexItemData = InvData[index];
-			SlotWidgets[index]->UpdateData(IndexItemData);
-			UpdateWeightText();
+			else
+			{
+				// case Item Get or ItemDrop
+				TArray<FGameItemData> InvData = Inventory->GetInventoryData();
+				const FGameItemData IndexItemData = InvData[index];
+				SlotWidgets[index]->UpdateData(IndexItemData);
+				UpdateWeightText();
+			}			
 		}
 	}
 	else
@@ -132,7 +130,6 @@ void UUserInventory::UpdateInventoryUIWithIdx(int32 index)
 		UE_LOG(LogTemp,Error,TEXT("SlotWidget Index invalid!"));
 	}
 }
-
 
 void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 {
@@ -147,19 +144,18 @@ void UUserInventory::BindInventory(UGameInventory* PlayerInventory)
 		if (Inventory.IsValid())
 		{
 			Inventory->ChangeInventoryData.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUI);
-			Inventory->ChnageInventoryDataWithIndex.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUIWithIdx);
+			Inventory->ChangeInventoryDataWithIndex.AddUniqueDynamic(this, &UUserInventory::UpdateInventoryUIWithIdx);
 		}		
 	}
 }
 
-
 bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, UDragDropOperation* Op)
 {
-
 	if (!Inventory.IsValid() || !Op) return false;
 
-
 	UUserInventorySlot* DragSlot = Cast<UUserInventorySlot>(Op->Payload);
+
+	if (!DragSlot) return false;
 
 	int TargetIndex = DragSlot->GetSlotIndex();
 
@@ -168,7 +164,6 @@ bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, U
 		UE_LOG(LogTemp,Warning,TEXT("TargetIndex :%d "),TargetIndex);
 		return false;
 	}
-
 
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("NativeOnDrop")); 
 
@@ -187,6 +182,8 @@ bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, U
 			// call Item Drop Num configuration
 			if (DropNumPrompt)
 			{
+				DropNumPrompt->SetSlotData(DragSlot);
+				DropNumPrompt->SetNumberText(DragSlot->GetItemQty());
 				if (DropNumPrompt->IsInViewport())
 				{
 					DropNumPrompt->SetVisibility(ESlateVisibility::Visible);
@@ -229,8 +226,6 @@ void UUserInventory::UpdateWeightText()
 	WeightText->SetText(Result);
 	return;
 }
-
-
 
 // 마우스 포인트 계산을 여기서
 bool UUserInventory::CheckMousePointInUI(const FDragDropEvent& E)

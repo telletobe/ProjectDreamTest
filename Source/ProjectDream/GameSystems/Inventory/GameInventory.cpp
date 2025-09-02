@@ -69,18 +69,34 @@ void UGameInventory::InitInventory(int32 Size)
 
 void UGameInventory::ItemDrop(int32 TargetIndex)
 {
-	if (TargetIndex == INDEX_NONE) return;
+	if (TargetIndex <= INDEX_NONE) return;
 	if (!InventoryData.IsValidIndex(TargetIndex)) return;
 
 	InventoryData.RemoveAt(TargetIndex);
-	ChnageInventoryDataWithIndex.Broadcast(TargetIndex);
+	ChangeInventoryDataWithIndex.Broadcast(TargetIndex);
 
 }
 
 void UGameInventory::AddToQty(int32 ItemIndex, int32 ItemQty)
 {
+	if (!InventoryData.IsValidIndex(ItemIndex)) return;
 	InventoryData[ItemIndex].ItemQty += ItemQty;
-	ChnageInventoryDataWithIndex.Broadcast(ItemIndex);
+	ChangeInventoryDataWithIndex.Broadcast(ItemIndex);
+}
+
+void UGameInventory::MinusToQty(int32 ItemIndex, int32 ItemQty)
+{
+	if (!InventoryData.IsValidIndex(ItemIndex)) return;
+	InventoryData[ItemIndex].ItemQty -= ItemQty;
+
+	if (InventoryData[ItemIndex].ItemQty == 0)
+	{
+		ItemDrop(ItemIndex);
+	}
+	else
+	{
+		ChangeInventoryDataWithIndex.Broadcast(ItemIndex);
+	}
 }
 
 
@@ -89,7 +105,6 @@ bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 	for (int32 i = 0; i < InventoryData.Num(); i++)
 	{
 		// 같은 아이템이 있다면 아이템 데이터의 갯수만 증가후 배열에 추가하지않음.
-		// 아이템 갯수는 증가하나 BroadCast가 돼지않아 UI의 갱신이 안돼는중.
 		if ((InventoryData[i].ItemCategory == ItemData.ItemCategory) && InventoryData[i].ItemID == ItemData.ItemID)
 		{
 			AddToQty(i,ItemData.ItemQty);
