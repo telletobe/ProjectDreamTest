@@ -38,6 +38,13 @@ void AGameItem::BeginPlay()
 		BoxCollision->OnComponentBeginOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxBegin);
 		BoxCollision->OnComponentEndOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxEnd);
 	}
+	//Unique ID가 필요한 경우 UniqueID 생성
+	bool NeedsUID = ItemData.MakeUniqueID();
+	if (NeedsUID)
+	{
+		UE_LOG(LogTemp,Warning,TEXT("Equipment Item"));
+	}
+	
 }
 
 // Called every frame

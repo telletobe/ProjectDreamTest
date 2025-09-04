@@ -4,6 +4,17 @@
 #include "GameSystems/Inventory/GameInventory.h"
 #include "GameItem.h"
 
+bool FGameItemData::operator==(const FGameItemData& Other) const
+{
+	return ItemCategory == Other.ItemCategory && ItemID == Other.ItemID && UniqueID == Other.UniqueID;
+			
+}
+
+bool FGameItemData::operator!=(const FGameItemData& Other) const
+{
+	return !(*this == Other);
+}
+
 FGameItemData& FGameItemData::SetItemCategory(ECategory Category)
 {
 	ItemCategory = Category;
@@ -50,6 +61,29 @@ FGameItemData& FGameItemData::SetItemQty(int Qty)
 {
 	ItemQty = Qty;
 	return *this;
+}
+
+bool FGameItemData::MakeUniqueID()
+{
+	if (ItemCategory == ECategory::Equipment)
+	{
+		UniqueID = FGuid::NewGuid();
+		return true;
+	}
+	else
+	{
+		UE_LOG(LogTemp,Warning,TEXT("not used UniqueID"));
+	}
+	return false;
+}
+
+void FGameItemData::PrintUID() const
+{
+	if (UniqueID.IsValid())
+	{
+		FString GUidStr = UniqueID.ToString();
+		UE_LOG(LogTemp,Warning,TEXT("Item UID : %s"), *GUidStr);
+	}
 }
 
 UGameInventory::UGameInventory()
@@ -102,17 +136,21 @@ void UGameInventory::MinusToQty(int32 ItemIndex, int32 ItemQty)
 
 bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 {
-	for (int32 i = 0; i < InventoryData.Num(); i++)
+	if (!ItemData.IsValid())
 	{
-		// 같은 아이템이 있다면 아이템 데이터의 갯수만 증가후 배열에 추가하지않음.
-		if ((InventoryData[i].ItemCategory == ItemData.ItemCategory) && InventoryData[i].ItemID == ItemData.ItemID)
-		{
-			AddToQty(i,ItemData.ItemQty);
-			return true;
-		}
+		return false;
 	}
-
+	ItemData.PrintUID();
 	FGameItemData Data;
+
+	// 같은 아이템이 있다면 아이템 데이터의 갯수만 증가후 배열에 추가하지않음.
+	if (InventoryData.Contains(ItemData))
+	{
+		int32 Index = InventoryData.Find(ItemData);
+		AddToQty(Index, ItemData.ItemQty);
+		UE_LOG(LogTemp,Warning,TEXT("Contains Item"));
+		return true;
+	}
 
 	Data.SetItemName(ItemData.ItemName)
 		.SetItemCategory(ItemData.ItemCategory)
@@ -121,15 +159,6 @@ bool UGameInventory::AddToInventory(const FGameItemData& ItemData)
 		.SetUseQuickSlot(false)
 		.SetItemWeight(ItemData.ItemWeight)
 		.SetItemQty(ItemData.ItemQty);
-	if (ItemData.ItemCategory == ECategory::Equipment)
-	{
-		Data.SetCanEquipment(true);
-	}
-	else
-	{
-		Data.SetCanEquipment(false);
-	}
-	
 
 	int32 NewIndex = InventoryData.Add(Data);
 	if (InventoryData[NewIndex].IsValid())

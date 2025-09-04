@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Misc/Guid.h"
 #include "GameInventory.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangeInventoryData);
@@ -13,7 +14,7 @@ class AGameItem;
 UENUM()
 enum class ECategory : int8
 {
-	Equipment	UMETA(DisPlayName = "Equipment"),
+	Equipment	UMETA(DisPlayName = "Equipment"), // need UID
 	Consumable	UMETA(DisplayName = "Consumable"),
 	Other		UMETA(DisplayName = "Other")
 };
@@ -27,8 +28,10 @@ public:
 
 	FGameItemData() : ItemCategory(ECategory::Other), ItemID(-1), ItemName(TEXT("")), ItemDescription(TEXT("")), bCanEquipment(false), bUseQuickSlot(false), ItemQty(0), ItemWeight(0.0)
 	{
-
+		
 	}	
+	bool operator ==(const FGameItemData& Other) const;
+	bool operator !=(const FGameItemData& Other) const;
 
 	FGameItemData& SetItemCategory(ECategory Category);
 	FGameItemData& SetItemID(int32 ID);
@@ -38,6 +41,9 @@ public:
 	FGameItemData& SetUseQuickSlot(bool UseQuickSlot);
 	FGameItemData& SetItemWeight(float Weight);
 	FGameItemData& SetItemQty(int Qty);
+	bool MakeUniqueID();
+
+	void PrintUID() const;
 
 	bool IsValid() const { return (ItemID >= 1 && ItemQty > 0);}
 
@@ -53,6 +59,8 @@ public:
 	bool bCanEquipment;
 	UPROPERTY(EditAnywhere, Category = "Data")
 	bool bUseQuickSlot;
+	UPROPERTY(VisibleAnywhere, Category = "Data")
+	FGuid UniqueID;
 
 	UPROPERTY(EditAnywhere, Category = "Data")
 	int32 ItemQty;

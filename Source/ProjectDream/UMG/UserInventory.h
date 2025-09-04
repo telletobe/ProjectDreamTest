@@ -72,7 +72,6 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> ButtonClose;
 
-
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UQuantityPrompt> DropNumPromptClass;
 
