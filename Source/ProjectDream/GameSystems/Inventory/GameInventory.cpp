@@ -3,6 +3,7 @@
 
 #include "GameSystems/Inventory/GameInventory.h"
 #include "GameItem.h"
+#include "ProjectDreamCharacter.h"
 
 bool FGameItemData::operator==(const FGameItemData& Other) const
 {
@@ -131,6 +132,44 @@ void UGameInventory::MinusToQty(int32 ItemIndex, int32 ItemQty)
 	{
 		ChangeInventoryDataWithIndex.Broadcast(ItemIndex);
 	}
+}
+
+void UGameInventory::SetOwner(AProjectDreamCharacter* P)
+{
+	if (P)
+	{
+		Player = P;
+	}
+}
+
+
+bool UGameInventory::CreateItemDataToUIWithDrop(const FGameItemData DropData)
+{
+	const FGameItemData OutData = DropData;
+
+	if (!Player.IsValid())  return false;
+
+	UWorld* World = Player->GetWorld();
+	if (!World) return false;
+
+	FVector SpawnLocation = Player->GetActorLocation() + Player->GetActorForwardVector() * 50.0f;
+	FRotator SpawnRotator = Player->GetActorRotation();
+
+	FActorSpawnParameters Params;
+	Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	AGameItem* DropItem = World->SpawnActor<AGameItem>(
+		AGameItem::StaticClass(),
+		SpawnLocation,
+		SpawnRotator,
+		Params);
+
+	if (DropItem)
+	{
+		DropItem->SetItemData(OutData);
+	}
+
+	return true;
 }
 
 

@@ -56,6 +56,7 @@ void UUserInventorySlot::UpdateData(const FGameItemData& InData)
 	}
 
 	SetSlotIndex(InData.ItemIndex);
+	UniqueID = InData.UniqueID;
 }
 
 void UUserInventorySlot::UpdateSlotIndex(int32 Index)
@@ -153,5 +154,103 @@ void UUserInventorySlot::SetupOwner(UUserInventory* InOwner)
 	}
 
 	return;
+}
+
+FGameItemData UUserInventorySlot::MakeItemData()
+{
+	FGameItemData OutData;
+
+	if (ItemName)
+	{
+		OutData.ItemName = ItemName->GetText().ToString();
+	}
+
+	if (ItemQty)
+	{
+		OutData.ItemQty = FCString::Atoi(*(ItemQty->GetText().ToString()));
+	}
+
+	if (ItemCategory)
+	{
+		
+		 FString CategoryText = ItemCategory->GetText().ToString();
+
+		 if (CategoryText.Equals("Equipment"))
+		 {
+			 OutData.ItemCategory = ECategory::Equipment;
+		 }
+		 else if (CategoryText.Equals("Consumable"))
+		 {
+			 OutData.ItemCategory = ECategory::Consumable;
+		 }
+		 else
+		 {
+			 OutData.ItemCategory = ECategory::Other;
+		 }		 		 
+	}
+
+	if (ItemWeight)
+	{
+		OutData.ItemWeight = FCString::Atof(*(ItemWeight->GetText().ToString()));
+	}
+
+	if (UniqueID.IsValid())
+	{
+		OutData.UniqueID = UniqueID;
+	}
+
+	return OutData;
+
+}
+
+FGameItemData UUserInventorySlot::MakeItemData(int32 DropNum)
+{
+	FGameItemData OutData;
+
+	if (ItemName)
+	{
+		OutData.ItemName = ItemName->GetText().ToString();
+	}
+
+	if (ItemQty)
+	{
+		OutData.ItemQty = DropNum;
+	}
+
+	if (ItemCategory)
+	{
+
+		FString CategoryText = ItemCategory->GetText().ToString();
+
+		if (CategoryText.Equals("Equipment"))
+		{
+			OutData.ItemCategory = ECategory::Equipment;
+		}
+		else if (CategoryText.Equals("Consumable"))
+		{
+			OutData.ItemCategory = ECategory::Consumable;
+		}
+		else
+		{
+			OutData.ItemCategory = ECategory::Other;
+		}
+	}
+
+	if (ItemWeight)
+	{
+		if (ItemQty)
+		{
+			float OneItemWeight = FCString::Atof(*(ItemWeight->GetText().ToString())) /  FCString::Atof(*(ItemQty->GetText().ToString()));
+			OutData.ItemWeight = OneItemWeight * DropNum;
+		}		
+	}
+
+	if (UniqueID.IsValid())
+	{
+		OutData.UniqueID = UniqueID;
+	}
+
+	return OutData;
+
 }
 

@@ -39,6 +39,8 @@ public:
 	int32 GetItemQty();
 	void SetSlotIndex(int32 Index);
 	void SetupOwner(UUserInventory* InOwner);
+	FGameItemData MakeItemData();
+	FGameItemData MakeItemData(int32 DropNum);
 
 private:
 
@@ -60,6 +62,7 @@ private:
 	TObjectPtr<UTextBlock> ItemWeight;
 
 	int32 SlotIndex;
+	FGuid UniqueID;
 
 	TWeakObjectPtr<UUserInventory> OwnerUI;
 

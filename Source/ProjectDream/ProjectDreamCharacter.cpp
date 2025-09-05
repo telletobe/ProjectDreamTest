@@ -76,6 +76,7 @@ void AProjectDreamCharacter::BeginPlay()
 		ItemInventory = NewObject<UGameInventory>(this, UGameInventory::StaticClass());
 		if (ItemInventory)
 		{
+			ItemInventory->SetOwner(this);
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::MakeRandomColor(), TEXT("Inventory Create"));
 			UE_LOG(LogTemplateCharacter,Warning,TEXT("Inventory Create"));
 			OnReadyInventory.Broadcast(ItemInventory);

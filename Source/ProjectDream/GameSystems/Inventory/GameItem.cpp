@@ -38,13 +38,12 @@ void AGameItem::BeginPlay()
 		BoxCollision->OnComponentBeginOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxBegin);
 		BoxCollision->OnComponentEndOverlap.AddUniqueDynamic(this, &AGameItem::OnBoxEnd);
 	}
-	//Unique ID가 필요한 경우 UniqueID 생성
-	bool NeedsUID = ItemData.MakeUniqueID();
-	if (NeedsUID)
+
+	//Unique ID가 필요한 경우 UniqueID 생성	
+	if (!ItemData.UniqueID.IsValid())
 	{
-		UE_LOG(LogTemp,Warning,TEXT("Equipment Item"));
-	}
-	
+		ItemData.MakeUniqueID();
+	}	
 }
 
 // Called every frame
@@ -67,6 +66,11 @@ void AGameItem::Interact(ACharacter* Interactor)
 			Destroy();
 		}
 	}
+}
+
+void AGameItem::SetItemData(const FGameItemData Data)
+{
+	ItemData = Data;
 }
 
 void AGameItem::OnBoxBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -109,5 +113,6 @@ void AGameItem::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	Super::EndPlay(EndPlayReason);
 }
+
 
 

@@ -175,7 +175,17 @@ bool UUserInventory::NativeOnDrop(const FGeometry& G, const FDragDropEvent& E, U
 	{
 		if (SlotWidgets[TargetIndex]->GetItemQty() <= 1)
 		{
+			if(Inventory->CreateItemDataToUIWithDrop(SlotWidgets[TargetIndex]->MakeItemData()))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("DropItem Create Succeed"));
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("DropItem Create fail"));
+			}
+			
 			Inventory->ItemDrop(TargetIndex); 
+
 		}
 		else
 		{

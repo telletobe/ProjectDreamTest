@@ -11,6 +11,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChangeInventoryDataWithIndex, int32
 
 class AGameItem;
 
+
 UENUM()
 enum class ECategory : int8
 {
@@ -84,6 +85,7 @@ public :
 	bool AddToInventory(const FGameItemData& ItemData);
 	void InitInventory(int32 Size);
 	void ItemDrop(int32 TargetIndex);
+	bool CreateItemDataToUIWithDrop(const FGameItemData DropData);
 
 	const TArray<FGameItemData>& GetInventoryData() const { return InventoryData; }
 	const FGameItemData& GetInventoryData(int32 Index) const { return InventoryData[Index]; }
@@ -94,8 +96,10 @@ public :
 
 	void AddToQty(int32 ItemIndex ,int32 ItemQty);
 	void MinusToQty(int32 ItemIndex, int32 ItemQty);
+	void SetOwner(class AProjectDreamCharacter* P);
 private:
 
 	TArray<FGameItemData> InventoryData;
+	TWeakObjectPtr<class AProjectDreamCharacter> Player;
 	
 };
